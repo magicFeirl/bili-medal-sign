@@ -1,0 +1,2 @@
+aiohttp
+nest_asyncio
