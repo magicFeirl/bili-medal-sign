@@ -7,7 +7,7 @@ USERS = [
         # your sessdata & bili_jct (get them from cookie)
         'SESSDATA': '',
         'BILI_JCT': '',
-        # only checkout user where in UID_WHITE_LIST
+        # only checkout user in the UID_WHITE_LIST
         'UID_WHITE_LIST': [333]
     },
     # user 2
