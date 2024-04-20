@@ -1,10 +1,12 @@
-import aiohttp
+import base64
 
+import aiohttp
 
 LIVE_API_SET = {
     'get_fans_medal': 'https://api.live.bilibili.com/xlive/app-ucenter/v1/fansMedal/panel',
     'send_danmaku': 'https://api.live.bilibili.com/msg/send',
     'like_report': 'https://api.live.bilibili.com/xlive/app-ucenter/v1/like_info_v3/like/likeReportV3',
+    'heartbeat': 'https://live-trace.bilibili.com/xlive/rdata-interface/v1/heartbeat/webHeartBeat'
 }
 
 
@@ -84,3 +86,12 @@ class BiliLive(object):
 
         async with self._request('POST', LIVE_API_SET['like_report'], data=data) as resp:
             return await resp.json()
+
+    async def heartbeat(self, room_id, interval=60):
+        params = {
+            'hb': base64.b64encode(f'{interval}|{room_id}|1|0'.encode()).decode(),
+            'pf': 'web'
+        }
+
+        async with self._request('GET', LIVE_API_SET['heartbeat'], params=params) as resp:
+            return resp
