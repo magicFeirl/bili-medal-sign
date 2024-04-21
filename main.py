@@ -16,7 +16,7 @@ async def create_live_task(user: dict):
         while beat_count < minutes:
             beat_count += 1
             print(f'heartbeating {uname}(ROOMID: {roomid})...')
-            await hb(roomid)
+            print(await hb(roomid))
             await asyncio.sleep(60)
 
     heartbeat_tasks = []
@@ -46,6 +46,7 @@ async def create_live_task(user: dict):
 
                 print(await l.like_report(roomid, target_uid))
                 print(await l.send_danmaku(roomid, random.choice(config.MSG_LIST)))
+                await asyncio.sleep(5.5)
             else:
                 print(
                     f'UID:{target_uid} {target_name} not in whitelist, skip it.')

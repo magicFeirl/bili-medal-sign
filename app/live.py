@@ -93,5 +93,6 @@ class BiliLive(object):
             'pf': 'web'
         }
 
+        print(params['hb'])
         async with self._request('GET', LIVE_API_SET['heartbeat'], params=params) as resp:
-            return resp
+            return await resp.json()
